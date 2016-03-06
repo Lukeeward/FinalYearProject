@@ -1,7 +1,7 @@
 angular.module('starter.controllers', ['pubnub.angular.service'])
 
-.controller('EpCtrl', function($scope, PubNub, $stateParams, $state, $ionicViewSwitcher) {
-
+.controller('EpCtrl', function($scope, PubNub, $stateParams, $state, $ionicViewSwitcher, $ionicNavBarDelegate) {
+$ionicNavBarDelegate.showBackButton(false);
 console.log($stateParams.date);
 var dateStart;
 var dateEnd;
@@ -47,7 +47,6 @@ $scope.forwardDay = function(){
   var testdate = new Date($scope.date.setDate(($scope.date).getDate() + 1));
   console.log(testdate.getTime()/1000.0);
   $state.go('tab.episodes', {date : testdate});
-  $scope.date = "10/08/1994";
 };
 
 $scope.messages = [];
@@ -80,6 +79,7 @@ PubNub.ngHistoryQ({channel:'episodes', limit:500, start: ((($scope.dayStart).get
           noiseCount[noise] = (noiseCount[noise] || 0) + 1;
         });
         $scope.messages.push(JsonMessage);
+        console.log(JsonMessage);
         $scope.icon = getIcon(JsonMessage.count[0]);
         noiseCount = {};
       }
@@ -87,7 +87,16 @@ PubNub.ngHistoryQ({channel:'episodes', limit:500, start: ((($scope.dayStart).get
   });
 })
 
-.controller('EventsCtrl', function($scope, PubNub, $stateParams) {
+.controller('EventsCtrl', function($scope, PubNub, $stateParams, $ionicNavBarDelegate) {
+$ionicNavBarDelegate.showBackButton(true);
+  $scope.getIcon = function(reason){
+    switch(reason.toUpperCase()) {
+      case 'MAN': return 'ion-person-stalker';
+      case 'DOG': return 'ion-ios-paw';
+      case 'CLATTER': return 'ion-volume-high';
+      case 'MUSIC': return 'ion-music-note';
+    }
+  };
   //console.log($routeParams.message);
   $scope.messages = [];
   PubNub.init({
@@ -100,6 +109,9 @@ PubNub.ngHistoryQ({channel:'episodes', limit:500, start: ((($scope.dayStart).get
   datime.setHours(datime.getHours() - 2);
   //console.log(datime);
   datime = datime.getTime();
+
+  $scope.start = episode.start;
+  $scope.end = episode.end;
   //console.log((episode.start - (300*60)) * 10000000);
   //console.log(episode.end* 10000000);
   //console.log(new Date(((episode.start - (300*60)))*1000));
@@ -107,7 +119,7 @@ PubNub.ngHistoryQ({channel:'episodes', limit:500, start: ((($scope.dayStart).get
   
   PubNub.ngHistoryQ({channel:'events',limit:500, include_token:true}).then(function(payload) {
   var noiseCount = {};
-  var sep = {};
+  var sep = [];
   //console.log(payload);
     payload[0].forEach(function(eventmess) {
       //console.log(JSON.parse(eventmess.message));
@@ -119,14 +131,14 @@ PubNub.ngHistoryQ({channel:'episodes', limit:500, start: ((($scope.dayStart).get
         if(jsonmess.epid === JSON.parse($stateParams.message).epid)
         {
         mess.count.forEach(function(noise) {
-          noiseCount[noise] = (noiseCount[noise] || 0) + 1;
+          //noiseCount[noise] = (noiseCount[noise] || 0) + 1;
           console.log(eventmess);
         });
 
-        if(!sep[jsonmess.reason]) {
-          sep[jsonmess.reason] = [];
-        }
-        sep[jsonmess.reason].push(jsonmess);
+        //if(!sep[jsonmess.reason]) {
+        //  sep[jsonmess.reason] = [];
+        //}
+        sep.push(jsonmess);
         $scope.sep = sep;
         $scope.noiseCount = noiseCount;
         $scope.messages.push(eventmess);

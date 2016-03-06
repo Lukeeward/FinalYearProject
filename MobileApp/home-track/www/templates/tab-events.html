@@ -9,25 +9,32 @@
           </ul>
         </ul>
     </div>-->
-    <img ng-src="{{image}}"/>
-    <br />
-    <h4>Events ({{messages.length}})</h4>
-    <br />
-     <ion-list>
-        <div ng-repeat="(key, value) in noiseCount">
+    <div class="list card">
+      <div class="item item-image">
+        <img ng-src="{{image}}"/>
+      </div>
+      <div class="item item-divider text-center">
+        <h2>{{start * 1000 | date:'HH:mm:ss'}} - {{end * 1000 | date:'HH:mm:ss'}}</h2>
+        <h2>Events ({{messages.length}})</h2>
+      </div>
+    </div>
+    <div>
+      <ion-list>
+        <div class="card" ng-repeat="(key, value) in sep">
           <ion-item class="item-stable"
                     ng-click="toggleGroup(key)"
                     ng-class="{active: isGroupShown(key)}">
-              <i class="icon" ng-class="isGroupShown(key) ? 'ion-minus' : 'ion-plus'"></i>
+            <!--<i class="icon" ng-class="isGroupShown(key) ? 'ion-minus' : 'ion-plus'"></i>-->
+            <i class="icon" ng-class="getIcon(value.reason)"></i>
             &nbsp;
-            {{key}} : {{noiseCount[key]}}
+            {{value.reason}}
           </ion-item>
           <ion-item class="item-accordion"
-                    ng-repeat="message in sep[key]"
                     ng-show="isGroupShown(key)">
-            {{message}}
+            {{value.time * 1000 | date:'yyyy-MM-dd HH:mm:ss'}}
           </ion-item>
         </div>
       </ion-list>
+    </div>
   </ion-content>
 </ion-view>

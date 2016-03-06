@@ -2,16 +2,16 @@
   <ion-content class="padding">
     <br />
     <div class="button-bar">
-      <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="backDay()">Back</a>
-      <h4>{{date | date:"MM/dd/yyyy"}}</h4>
-      <a class="button icon-right ion-chevron-right button-clear button-dark" ng-click="forwardDay()">Next</a>
+      <a class="button icon-left ion-chevron-left button-clear button-dark font" ng-click="backDay()">Back</a>
+      <h4 class="font">{{date | date:"MM/dd/yyyy"}}</h4>
+      <a class="button icon-right ion-chevron-right button-clear button-dark font" ng-click="forwardDay()">Next</a>
     </div>
     <br />
     <h4>episode count ({{messages.length}})</h4>
     <div class="list card" ng-repeat="message in messages">
-      <a href="#/tab/events/{{message}}" class="item item-icon-left">
+      <a href="#/tab/events/{{message}}" class="item item-icon-left font">
         <i class="icon {{icon}}"></i>
-        {{message.start | date:"MM/dd/yyyy 'at' h:mma"}}
+        {{message.count.length + " events "}}{{message.start * 1000 | date:"'at' h:mm a"}}
       </a>
     </div>
   </ion-content>

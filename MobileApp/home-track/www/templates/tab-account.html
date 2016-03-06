@@ -1,10 +1,86 @@
 <ion-view view-title="Account">
   <ion-content>
-     <label class="toggle toggle-assertive">
-       <input type="checkbox">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
+  	<ul class="list">
+		<div class="item item-divider">
+			System
+		</div>
+		<li class="item">
+			<div style="width: 100%">
+				<div class="button-bar">
+					<a class="button font button-clear button-dark" ng-disabled="true" style="opacity: 1 !important">Off</a>
+					<a class="button button-clear" ng-click="toggleOnOff()">
+						<label class="toggle toggle-assertive" style="margin-top: 2%">
+						<input type="checkbox" ng-model="OnOffToggle">
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+					</a>
+					<a class="button font button-clear button-dark" ng-disabled="true" style="opacity: 1 !important">On</a>
+				</div>
+			</div>
+      	</li>
+
+      	<div class="item item-divider">
+			Motion Detection
+		</div>
+		<li class="item">
+			<div style="width: 100%">
+				<div class="button-bar">
+					<a class="button font button-clear button-dark" ng-disabled="true" style="opacity: 1 !important">Off</a>
+					<a class="button button-clear" ng-click="toggleMotion()">
+						<label class="toggle toggle-assertive" style="margin-top: 2%">
+						<input type="checkbox" ng-model="MotionToggle">
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+					</a>
+					<a class="button font button-clear button-dark" ng-disabled="true" style="opacity: 1 !important">On</a>
+				</div>
+			</div>
+      	</li>
+      	<div class="item item-divider">
+			Push Notifications
+		</div>
+		<li class="item item-toggle">
+			On Movement
+			<label class="toggle toggle-assertive">
+				<input type="checkbox">
+				<div class="track">
+					<div class="handle"></div>
+				</div>
+			</label>
+		</li>
+		<li class="item item-toggle">
+			On Dog Bark
+			<label class="toggle toggle-assertive">
+				<input type="checkbox">
+				<div class="track">
+					<div class="handle"></div>
+				</div>
+			</label>
+		</li>
+		<li class="item item-toggle">
+			On Speech
+			<label class="toggle toggle-assertive">
+				<input type="checkbox">
+				<div class="track">
+					<div class="handle"></div>
+				</div>
+			</label>
+		</li>
+      	<div class="item item-divider">
+			Animals
+		</div>
+		<li class="item item-toggle">
+			Dog
+			<label class="toggle toggle-assertive">
+				<input type="checkbox">
+				<div class="track">
+					<div class="handle"></div>
+				</div>
+			</label>
+		</li>
   </ion-content>
 </ion-view>

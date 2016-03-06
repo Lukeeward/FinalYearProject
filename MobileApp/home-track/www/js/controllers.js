@@ -85,6 +85,23 @@ PubNub.ngHistoryQ({channel:'episodes', limit:500, start: ((($scope.dayStart).get
       }
     });
   });
+
+  PubNub.ngHistoryQ({channel:'snapshots', limit:500, start: ((($scope.dayStart).getTime()/1000.0)*10000000)-1, end: ((($scope.dayEnd).getTime()/1000.0)*10000000)-1, include_token:true}).then(function(payload) {
+  //console.log(payload);
+    if(payload[0].length > 0)
+    {
+        message = payload[0][0];
+        console.log(message);
+        if(message.message.epid !== undefined)
+        {
+            //console.log(message.message);
+            var image = new Image();
+            $scope.image = 'data:image/png;base64,' + message.message.picture;
+        }
+    } else {
+      $scope.image = '../img/NO_DATA.jpg';
+    }
+  });
 })
 
 .controller('EventsCtrl', function($scope, PubNub, $stateParams, $ionicNavBarDelegate) {
@@ -149,8 +166,6 @@ $ionicNavBarDelegate.showBackButton(true);
   });
   
   PubNub.ngHistoryQ({channel:'snapshots', limit:500, start: ((episode.start - (60)) * 10000000), end: ((episode.end + 60) * 10000000), include_token:true}).then(function(payload) {
-  var noiseCount = {};
-  //console.log(payload);
     payload[0].forEach(function(message) {
       console.log(message);
       if(message.message.epid !== undefined)
@@ -160,8 +175,6 @@ $ionicNavBarDelegate.showBackButton(true);
           //console.log(message.message);
           var image = new Image();
           $scope.image = 'data:image/png;base64,' + message.message.picture;
-          document.body.appendChild(image);
-          noiseCount = {};
         }
       }
     });
@@ -188,7 +201,12 @@ $ionicNavBarDelegate.showBackButton(true);
 })
 
 .controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+  $scope.OnOffToggle = true;
+  $scope.toggleOnOff = function(){
+    $scope.OnOffToggle = !$scope.OnOffToggle;
+  };
+  $scope.MotionToggle = true;
+  $scope.toggleMotion = function(){
+    $scope.MotionToggle = !$scope.MotionToggle;
   };
 });

@@ -1,0 +1,10 @@
+<div type="text/ng-template" id="episodes.html">
+    <br />
+    <h4>Today's episodes ({{messages.length}})</h4>
+    <br />
+    <div class="well">
+        <ul ng-repeat="message in messages">
+            <li><a href="#/events/{{message}}">{{message}}</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+/home/Project/split/124_20/2016-01-24_2054201.wav	Dog
+/home/Project/split/124_20/2016-01-24_2054212.wav	Dog
+/home/Project/split/124_20/2016-01-24_2054247.wav	clatter
+/home/Project/split/124_20/2016-01-24_2055421.wav	clatter
+/home/Project/split/124_20/2016-01-24_2055433.wav	Dog
+/home/Project/split/124_20/2016-01-24_2055444.wav	Dog
+/home/Project/split/124_20/2016-01-24_2055445.wav	clatter
+/home/Project/split/124_20/2016-01-24_20554927.wav	Dog
+/home/Project/split/124_20/2016-01-24_20555235.wav	Dog
+/home/Project/split/124_20/2016-01-24_20555441.wav	Dog
+/home/Project/split/124_20/2016-01-24_2058155.wav	Dog
+Dog                 		8
+person              		0
+clatter             		3
+frantic             		0

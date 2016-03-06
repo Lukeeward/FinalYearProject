@@ -1,0 +1,16 @@
+could use chromaprint to create audio fingerprint of bark and compare with 3 fingerprints from small, medium and large dog barks
+
+In each string of barks the barks are going to have to be segmented out as separate barks, pyAudioAnalysis can do this
+apparently using sementation learning. I beleive i have to supply some ideal barks (e.g. 20) for it to distinguish the unique
+sound.
+
+use pyaudioanalyse to create a classification thing from the default barks folder, then classify the whole split folder and
+see what happens
+
+so the classification thing seems to return numbers or some shit to the console, still unsure what it does
+i think you need to get folder classification working as that might return soemthing different OR give it some different sounds
+in the classification
+
+The sound recording should automatically call silenceRemoval then automatically call classify folder
+i will also need a cron tab to remove all old folders every like day or what ever
+

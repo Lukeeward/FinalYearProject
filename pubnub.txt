@@ -1,0 +1,4 @@
+python -m pyAudioAnalysis.audioAnalysis classifyFolder -i /home/pi/Documents/split/111_09 --model knn --classifier /home/pi/Documents/testDog3 --details
+
+
+25KennetGrove$

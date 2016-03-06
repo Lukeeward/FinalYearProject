@@ -1,0 +1,33 @@
+<ion-view view-title="Events">
+  <ion-content>
+    <!--<div class="well">
+      <img ng-src="{{image}}"/>
+      <ul ng-repeat="(key, value) in noiseCount">
+        <li><a href="#">{{key}} : {{noiseCount[key]}}</a></li>
+          <ul ng-repeat="message in sep[key]">
+              <li><a href="#">{{message}}</a></li>
+          </ul>
+        </ul>
+    </div>-->
+    <img ng-src="{{image}}"/>
+    <br />
+    <h4>Events ({{messages.length}})</h4>
+    <br />
+     <ion-list>
+        <div ng-repeat="(key, value) in noiseCount">
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(key)"
+                    ng-class="{active: isGroupShown(key)}">
+              <i class="icon" ng-class="isGroupShown(key) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            {{key}} : {{noiseCount[key]}}
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-repeat="message in sep[key]"
+                    ng-show="isGroupShown(key)">
+            {{message}}
+          </ion-item>
+        </div>
+      </ion-list>
+  </ion-content>
+</ion-view>

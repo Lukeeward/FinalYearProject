@@ -21,7 +21,7 @@
     <h4>episode count ({{messages.length}})</h4>
     <div class="list card" ng-repeat="message in messages">
       <a href="#/tab/events/{{message}}" class="item item-icon-left font">
-        <i class="icon {{icon}}"></i>
+        <i class="icon {{message.icon}}"></i>
         {{message.count.length + " events "}}{{message.start * 1000 | date:"'at' h:mm a"}}
       </a>
     </div>

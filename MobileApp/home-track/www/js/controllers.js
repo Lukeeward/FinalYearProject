@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['pubnub.angular.service'])
+.controller('EpCtrl', function($scope, PubNub, $stateParams, $state, $ionicViewSwitcher, $ionicNavBarDelegate, $ionicPlatform) {
 
-.controller('EpCtrl', function($scope, PubNub, $stateParams, $state, $ionicViewSwitcher, $ionicNavBarDelegate) {
 $ionicNavBarDelegate.showBackButton(false);
 console.log($stateParams.date);
 var dateStart;
@@ -32,7 +32,8 @@ var getIcon = function(reason){
     case 'MAN': return 'ion-person-stalker';
     case 'DOG': return 'ion-ios-paw';
     case 'CLATTER': return 'ion-volume-high';
-    case 'MUSIC': return 'ion-music-note';
+    case 'LOWNOISE': return 'ion-volume-low';
+    case 'BANG': return 'ion-alert';
   }
 };
 
@@ -78,9 +79,10 @@ PubNub.ngHistoryQ({channel:'episodes', limit:500, start: ((($scope.dayStart).get
         JsonMessage.count.forEach(function(noise) {
           noiseCount[noise] = (noiseCount[noise] || 0) + 1;
         });
+        var arr = Object.keys(noiseCount).reduce(function(a, b){ return noiseCount[a] > noiseCount[b] ? a : b });
+        JsonMessage.icon = getIcon(arr);
         $scope.messages.push(JsonMessage);
         console.log(JsonMessage);
-        $scope.icon = getIcon(JsonMessage.count[0]);
         noiseCount = {};
       }
     });
@@ -111,7 +113,8 @@ $ionicNavBarDelegate.showBackButton(true);
       case 'MAN': return 'ion-person-stalker';
       case 'DOG': return 'ion-ios-paw';
       case 'CLATTER': return 'ion-volume-high';
-      case 'MUSIC': return 'ion-music-note';
+      case 'LOWNOISE': return 'ion-volume-low';
+      case 'BANG': return 'ion-alert';
     }
   };
   //console.log($routeParams.message);

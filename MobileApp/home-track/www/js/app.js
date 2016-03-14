@@ -20,15 +20,25 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-
+  });
+})
+.run(function($ionicPlatform, $location) {
+  $ionicPlatform.ready(function() {
     var push = new Ionic.Push({
-      "debug": true
+      "debug": true,
+      "onNotification": function(notification) {
+        var payload = notification.payload;
+        console.log(notification, payload);
+        $location.path("/tab/events/" + payload);
+      },
+      "onRegister": function(data) {
+        console.log(data.token);
+      }
     });
 
     push.register(function(token) {
       console.log("Device token:",token.token);
     });
-
   });
 })
 

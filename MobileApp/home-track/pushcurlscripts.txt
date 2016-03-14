@@ -1,0 +1,24 @@
+curl -X POST -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyYTBkZDliOS00YTBkLTQ5NDUtODM1Yy1lMzUzODI3M2JlZjkifQ.MHCaBPpIGT4jyhDSD_Bx21AYwysnuRkngiitmfBZOfU" -H "Content-Type: application/json" -d '{
+    "tokens": ["faY2uaxV8gk:APA91bG_qob-vEVNcxR_yppjsR4rrmYJ7Mt3ytSWA38CXUkWQOE5ke9FPdOIBZdEyeZhFFNB6uNXAyXLp9MqiQ8qn9LAgwOgDrNSNtkCDtuCciFn0L620uvyecdwFSVDOHmOnJphBcHw"],
+    "profile": "final",
+    "notification": {
+    "title": "Hi",
+    "message": "Hello world!",
+    "android": {
+      "title": "Hey",
+      "message": "Hello Android!",
+	  "payload": {
+        "epid": "4d880b4e-040a-4346-b1b9-d1d54a0d7522",
+		"start": "1457887182",
+		"end": "1457887194"
+      }
+    }
+  }
+}' "https://api.ionic.io/push/notifications"
+
+
+<a href="#/tab/events/{&quot;count&quot;:[&quot;Man&quot;,&quot;Man&quot;,&quot;Man&quot;,&quot;Man&quot;,&quot;Man&quot;,&quot;Man&quot;,&quot;Dog&quot;,&quot;Man&quot;],&quot;start&quot;:&quot;1457887182&quot;,&quot;epid&quot;:&quot;4d880b4e-040a-4346-b1b9-d1d54a0d7522&quot;,&quot;end&quot;:&quot;1457887194&quot;,&quot;level&quot;:0,&quot;icon&quot;:&quot;ion-person-stalker&quot;}" class="item item-icon-left font ng-binding">
+        <i class="icon ion-person-stalker"></i>
+        8 events at 4:39 PM
+      </a>
+curl -X POST -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyYTBkZDliOS00YTBkLTQ5NDUtODM1Yy1lMzUzODI3M2JlZjkifQ.MHCaBPpIGT4jyhDSD_Bx21AYwysnuRkngiitmfBZOfU" -H "Content-Type: application/json" -d '{"tokens": ["dkEd_39Nmec:APA91bHCV_m1A-YyLuZVJmGFzfcY2XIiBiIlqO6MLNrnZvdHEUW5UqG0RX_GGQuelRVjZ_nhLAPAmrgg1-MXLOjPSiBXfTWazLmSkhyhD6Yc3s3E5pjX9ZSOiM9hF5nsv-0Tsil6HaZo"],"profile": "final","notification": {"title": "Hi","message": "Hello world!","ios": {"message": "Hello iOS!","payload" {"baz": "boo"}},"android": {"Message": "Hello Android!","payload" {"epid": "12345"}}}}' "https://api.ionic.io/push/notifications"

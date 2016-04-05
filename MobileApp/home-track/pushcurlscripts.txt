@@ -1,5 +1,5 @@
 curl -X POST -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyYTBkZDliOS00YTBkLTQ5NDUtODM1Yy1lMzUzODI3M2JlZjkifQ.MHCaBPpIGT4jyhDSD_Bx21AYwysnuRkngiitmfBZOfU" -H "Content-Type: application/json" -d '{
-    "tokens": ["faY2uaxV8gk:APA91bG_qob-vEVNcxR_yppjsR4rrmYJ7Mt3ytSWA38CXUkWQOE5ke9FPdOIBZdEyeZhFFNB6uNXAyXLp9MqiQ8qn9LAgwOgDrNSNtkCDtuCciFn0L620uvyecdwFSVDOHmOnJphBcHw"],
+    "tokens": ["dh4YipbGyFA:APA91bGx9z8k_Hgq_qUb8-VvRWBM7oBEGQX8j9T_HG2y91qGwSCKj4RZV0kPtYFSM5_oVPmykVWuHZYWUuKjG4w2pIhWlP5bUseA8GPJvoOPgzsBZtYzy6ofGZYacenIescl3NnyPEPt"],
     "profile": "final",
     "notification": {
     "title": "Hi",

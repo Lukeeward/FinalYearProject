@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'starter.services', 'ionic.service.push'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicPush) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,22 +21,38 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
       StatusBar.styleDefault();
     }
   });
+
+  $ionicPush.register({
+      canShowAlert: false, //Can pushes show an alert on your screen?
+      canSetBadge: true, //Can pushes update app icon badges?
+      canPlaySound: true, //Can notifications play a sound?
+      canRunActionsOnWake: true, //Can run actions outside the app,
+      onNotification: function(notification) {
+        // Handle new push notifications here
+        console.log(notification);
+        $state.go(payload.$state, {"message" : JSON.stringify(payload.$stateParams)});
+        //$state.go('tab.live')
+        return true;
+      }
+    });
+
 })
-.run(function($ionicPlatform, $location) {
+.run(function($ionicPlatform, $location, $state, $ionicPush) {
   $ionicPlatform.ready(function() {
-    var push = new Ionic.Push({
-      "debug": true,
+    $ionicPush.init({
+      "debug": false,
       "onNotification": function(notification) {
         var payload = notification.payload;
         console.log(notification, payload);
-        $location.path("/tab/events/" + payload);
+        $state.go(payload.$state, {"message" : payload.$stateParams});
+        //$state.go('tab.live')
       },
       "onRegister": function(data) {
         console.log(data.token);
       }
     });
 
-    push.register(function(token) {
+    $ionicPush.register(function(token) {
       console.log("Device token:",token.token);
     });
   });

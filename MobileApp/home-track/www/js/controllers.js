@@ -101,7 +101,7 @@ PubNub.ngHistoryQ({channel:'episodes', limit:500, start: ((($scope.dayStart).get
             $scope.image = 'data:image/png;base64,' + message.message.picture;
         }
     } else {
-      $scope.image = '../img/NO_DATA.jpg';
+      $scope.image = '../www/img/NO_DATA.jpg';
     }
   });
 })
@@ -137,7 +137,7 @@ $ionicNavBarDelegate.showBackButton(true);
   //console.log(new Date(((episode.start - (300*60)))*1000));
   //console.log(new Date(episode.end * 1000));
   
-  PubNub.ngHistoryQ({channel:'events',limit:500, include_token:true}).then(function(payload) {
+  PubNub.ngHistoryQ({channel:'events',limit:100, include_token:true}).then(function(payload) {
   var noiseCount = {};
   var sep = [];
   //console.log(payload);

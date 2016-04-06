@@ -22,6 +22,26 @@
       	</li>
 
       	<div class="item item-divider">
+			Home Tracker
+		</div>
+		<li class="item">
+			<div style="width: 100%">
+				<div class="button-bar">
+					<a class="button font button-clear button-dark" ng-disabled="true" style="opacity: 1 !important">Off</a>
+					<a class="button button-clear" ng-click="toggleHomeTracker()">
+						<label class="toggle toggle-assertive" style="margin-top: 2%">
+						<input type="checkbox" ng-model="homeTrackerToggle">
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+					</a>
+					<a class="button font button-clear button-dark" ng-disabled="true" style="opacity: 1 !important">On</a>
+				</div>
+			</div>
+      	</li>
+
+      	<div class="item item-divider">
 			Motion Detection
 		</div>
 		<li class="item">
@@ -40,43 +60,34 @@
 				</div>
 			</div>
       	</li>
+
       	<div class="item item-divider">
 			Push Notifications
 		</div>
-		<li class="item item-toggle">
-			On Movement
-			<label class="toggle toggle-assertive">
-				<input type="checkbox">
-				<div class="track">
-					<div class="handle"></div>
+		<li class="item">
+			<div style="width: 100%">
+				<div class="button-bar">
+					<a class="button font button-clear button-dark" ng-disabled="true" style="opacity: 1 !important">Off</a>
+					<a class="button button-clear" ng-click="togglePush()">
+						<label class="toggle toggle-assertive" style="margin-top: 2%">
+						<input type="checkbox" ng-model="pushToggle">
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+					</a>
+					<a class="button font button-clear button-dark" ng-disabled="true" style="opacity: 1 !important">On</a>
 				</div>
-			</label>
-		</li>
-		<li class="item item-toggle">
-			On Dog Bark
-			<label class="toggle toggle-assertive">
-				<input type="checkbox">
-				<div class="track">
-					<div class="handle"></div>
-				</div>
-			</label>
-		</li>
-		<li class="item item-toggle">
-			On Speech
-			<label class="toggle toggle-assertive">
-				<input type="checkbox">
-				<div class="track">
-					<div class="handle"></div>
-				</div>
-			</label>
-		</li>
+			</div>
+      	</li>
+
       	<div class="item item-divider">
 			Animals
 		</div>
 		<li class="item item-toggle">
 			Dog
 			<label class="toggle toggle-assertive">
-				<input type="checkbox">
+				<input type="checkbox" ng-model="dogToggle" ng-change="toggleDog()">
 				<div class="track">
 					<div class="handle"></div>
 				</div>

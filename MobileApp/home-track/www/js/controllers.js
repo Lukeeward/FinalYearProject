@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['pubnub.angular.service'])
+angular.module('starter.controllers', ['pubnub.angular.service', 'ionic.service.push'])
 .controller('EpCtrl', function($scope, PubNub, $stateParams, $state, $ionicViewSwitcher, $ionicNavBarDelegate, $ionicPlatform) {
 
 $ionicNavBarDelegate.showBackButton(false);
@@ -203,13 +203,120 @@ $ionicNavBarDelegate.showBackButton(true);
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.OnOffToggle = true;
+.controller('AccountCtrl', function($scope, PubNub, $ionicPush) {
+  PubNub.init({
+    subscribe_key: 'sub-c-02de9d80-9a93-11e5-9a49-02ee2ddab7fe',
+    publish_key: 'pub-c-92b5e647-0c49-49a1-ab2a-4753777f53b9',
+  });
+
+  //system
+  if(window.localStorage['OnOffToggle'] == undefined || window.localStorage['OnOffToggle'] == null)
+    $scope.OnOffToggle = true;
+  else
+    $scope.OnOffToggle = (window.localStorage['OnOffToggle'] === 'true');
   $scope.toggleOnOff = function(){
+    //true going to false
+    if($scope.OnOffToggle) {
+      PubNub.ngPublish({
+        channel: 'commands',
+        message: {"command":"off"}
+      });
+    } 
     $scope.OnOffToggle = !$scope.OnOffToggle;
+    window.localStorage['OnOffToggle'] = $scope.OnOffToggle;
   };
-  $scope.MotionToggle = true;
+
+
+  //motion
+  if(window.localStorage['MotionToggle'] == undefined || window.localStorage['MotionToggle'] == null)
+    $scope.MotionToggle = true;
+  else
+    $scope.MotionToggle = (window.localStorage['MotionToggle'] === 'true');
   $scope.toggleMotion = function(){
+    if($scope.MotionToggle) {
+      PubNub.ngPublish({
+        channel: 'commands',
+        message: {"command":"detectionstop"}
+      });
+    } else {
+      //false going to true
+      PubNub.ngPublish({
+        channel: 'commands',
+        message: {"command":"detectionstart"}
+      });
+    }
     $scope.MotionToggle = !$scope.MotionToggle;
+    window.localStorage['MotionToggle'] = $scope.MotionToggle;
   };
+
+
+  //push toggle
+  if(window.localStorage['pushToggle'] == undefined || window.localStorage['pushToggle'] == null)
+    $scope.pushToggle = true;
+  else
+    $scope.pushToggle = (window.localStorage['pushToggle'] === 'true');
+  $scope.togglePush = function(){
+    if($scope.pushToggle)
+    {
+      $ionicPush.unregister();
+    } else {
+      $ionicPush.register(function(token) {
+        console.log("Device token:",token.token);
+      });
+    }
+
+    $scope.pushToggle = !$scope.pushToggle;
+    window.localStorage['pushToggle'] = $scope.pushToggle;
+  };
+
+  //home tracker
+  if(window.localStorage['homeTrackerToggle'] == undefined || window.localStorage['homeTrackerToggle'] == null)
+    $scope.homeTrackerToggle = false;
+  else
+    $scope.homeTrackerToggle = (window.localStorage['homeTrackerToggle'] === 'true');
+  $scope.toggleHomeTracker = function(){
+    //true going to false
+    if($scope.homeTrackerToggle) {
+      PubNub.ngPublish({
+        channel: 'commands',
+        message: {"command":"motionstop"}
+      });
+    } else {
+      //false going to true
+      PubNub.ngPublish({
+        channel: 'commands',
+        message: {"command":"motionstart"}
+      });
+    }
+    if(!$scope.MotionToggle && !$scope.homeTrackerToggle)
+      $scope.MotionToggle = true;
+    if($scope.MotionToggle && $scope.homeTrackerToggle)
+      $scope.MotionToggle = false;
+    $scope.homeTrackerToggle = !$scope.homeTrackerToggle;
+    window.localStorage['homeTrackerToggle'] = $scope.homeTrackerToggle;
+  };
+
+  ///dog toggle 
+  if(window.localStorage['dogToggle'] == undefined || window.localStorage['dogToggle'] == null)
+    $scope.dogToggle = true;
+  else
+    $scope.dogToggle = (window.localStorage['dogToggle'] === 'true');
+  $scope.toggleDog = function(){
+    //true going to false
+    if($scope.dogToggle) {
+      PubNub.ngPublish({
+        channel: 'commands',
+        message: {"command":"nodog"}
+      });
+    } else {
+      //false going to true
+      PubNub.ngPublish({
+        channel: 'commands',
+        message: {"command":"dog"}
+      });
+    }
+    $scope.dogToggle = !$scope.dogToggle;  
+    window.localStorage['dogToggle'] = $scope.dogToggle;  
+  }
+
 });

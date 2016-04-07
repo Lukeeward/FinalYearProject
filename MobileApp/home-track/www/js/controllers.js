@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['pubnub.angular.service', 'ionic.service.push'])
+angular.module('starter.controllers', ['pubnub.angular.service', 'ionic.service.push', 'ngSanitize'])
 .controller('EpCtrl', function($scope, PubNub, $stateParams, $state, $ionicViewSwitcher, $ionicNavBarDelegate, $ionicPlatform) {
 
 $ionicNavBarDelegate.showBackButton(false);
@@ -199,8 +199,17 @@ $ionicNavBarDelegate.showBackButton(true);
   
 })
 
-.controller('LiveCtrl', function($scope, $stateParams, Chats) {
+.controller('LiveCtrl', function($scope, $stateParams, Chats, $sce, $state) {
   $scope.chat = Chats.get($stateParams.chatId);
+  $scope.devIP = 'http://192.168.0.12:8081/';
+  $scope.setIP = function(address){
+    $scope.devIP = 'http://'+ address+':8081/';
+    $state.reload();
+  }
+
+  $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  }
 })
 
 .controller('AccountCtrl', function($scope, PubNub, $ionicPush) {

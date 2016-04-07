@@ -1,7 +1,0 @@
-/home/Project/split/024_20/2016-01-24_2054111.wav	clatter
-/home/Project/split/024_20/2016-01-24_2058004.wav	Dog
-/home/Project/split/024_20/2016-01-24_2058006.wav	clatter
-Dog                 		1
-person              		0
-clatter             		2
-frantic             		0
